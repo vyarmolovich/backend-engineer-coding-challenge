@@ -25,7 +25,9 @@ This project provides a RESTful API for optimizing room occupancy in a hotel. Th
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/vyarmolovich/backend-engineer-coding-challenge.git
+git clone 
+https://vyarmolovich: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@github.com/vyarmolovich/backend-engineer-coding-challenge.git
+
 cd backend-engineer-coding-challenge
 ```
 
