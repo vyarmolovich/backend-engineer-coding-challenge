@@ -90,4 +90,27 @@ public class OccupancyControllerTest {
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.potentialGuests").value("must not be empty"));
     }
+
+    @Test
+    void testAllocationWithNoData() throws Exception {
+
+        UsageDto response = UsageDto.builder()
+                .usagePremium(0)
+                .revenuePremium(0.0)
+                .usageEconomy(0)
+                .revenueEconomy(0.0)
+                .build();
+
+        when(occupancyService.allocateRooms(any(OccupancyDto.class)))
+                .thenReturn(response);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/occupancy")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{}")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.economyRooms").value("must not be null"))
+                .andExpect(jsonPath("$.premiumRooms").value("must not be null"))
+                .andExpect(jsonPath("$.potentialGuests").value("must not be empty"));
+    }
 }
